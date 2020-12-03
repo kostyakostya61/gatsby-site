@@ -23,7 +23,6 @@ router.post(
           message: 'Некорректные данные при регистрации',
         });
       }
-      
     } catch (e) {
       console.log(e);
       res.status(500).json({ message: 'Возникла ошибка,попробуйте снова' });
