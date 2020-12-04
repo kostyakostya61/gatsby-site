@@ -1,6 +1,7 @@
 const express = require('express');
 const config = require('config');
 const pg = require('pg');
+const bodyParser = require('body-parser');
 
 const app = express();
 const PORT = config.get('port') || 5000;
@@ -19,6 +20,9 @@ client.connect(function (err) {
     client.end();
   });
 });
+
+app.use(express.json());
+app.use(bodyParser.json());
 
 app.use('/auth', require('./routes/auth.routes'));
 
