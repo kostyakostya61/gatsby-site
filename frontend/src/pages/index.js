@@ -1,11 +1,6 @@
 import React from "react"
-import MainPage from "./components/main-page/main-page"
-import Container from "./container"
+import Container from "../components/container/container"
 
-const IndexPage = () => (
-  <Container>
-    <MainPage />
-  </Container>
-)
+const IndexPage = () => <Container></Container>
 
 export default IndexPage
