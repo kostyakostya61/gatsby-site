@@ -1,12 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import style from './modal.module.scss';
 
-function Modal({active, setActive}) {
+// onClick={()=>setActive(false)}
+//
+
+function Modal(onClose) {
   return (
-    <div className={ active ? style.modal.active : style.modal } onClick={()=>setActive(false)}>
-      <div className={style.content} onClick={e => e.stopPropagation()}></div>
+    <div className={style.modal} >
+      <div className={style.content}></div>
     </div>
   );
 }
 
-export default Modal 
+export default Modal;
