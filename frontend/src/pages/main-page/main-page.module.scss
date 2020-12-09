@@ -1,20 +1,24 @@
 .container {
   width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: url(./images/logo.png) no-repeat center;
+  background: url(./images/logo.png) no-repeat top center;
+  // background-image: url(./images/logo.png) no-repeat center;
   background-size: 100%;
 }
 
 .content {
   width: 100%;
-  max-width: 1100px;
+  height: 100%;
+  max-width: 1200px;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
+  margin-top: 58px;
 }
 
 .navigation {
@@ -51,9 +55,96 @@
     color: #ffffff;
     font-size: 14px;
     line-height: 17px;
+    text-decoration: none;
+  }
+
+  a:hover {
+    color: #ebe4e4;
   }
 }
 
 .link {
   margin-left: 20px;
+}
+
+.buttons {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  margin-left: 57px;
+  button {
+    font-family: 'Lato';
+    font-weight: 400;
+    color: #ffffff;
+    font-size: 14px;
+    line-height: 17px;
+    border: 1px solid #ffffff;
+    text-decoration: none;
+    border-radius: 6px;
+    background: none;
+    cursor: pointer;
+    width: 100px;
+    height: 40px;
+  }
+  button:hover,
+  button:active {
+    background-color: #fff;
+    color: red;
+    transition-duration: 0.4s;
+  }
+}
+
+.btn + .btn {
+  margin-left: 28px;
+}
+
+.company {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 157px;
+  text-align: center;
+}
+
+.header {
+  font-family: 'Lato';
+  font-size: 72px;
+  color: #fff;
+  line-height: 86px;
+  letter-spacing: 0.05em;
+}
+
+.description {
+  font-family: 'Lato';
+  font-weight: 600;
+  font-size: 24px;
+  color: #fff;
+  text-align: center;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-all;
+  width: 600px;
+}
+
+.sign_up {
+  button {
+    background: #fff;
+    border-radius: 6px;
+    width: 160px;
+    height: 50px;
+    font-family: 'Lato';
+    font-weight: 400;
+    color: rgba(237, 76, 92, 1);
+    font-size: 14px;
+    line-height: 17px;
+    border: 1px solid #ffffff;
+    cursor: pointer;
+  }
+  button:hover,
+  button:active {
+    background-color: rgb(237, 237, 237);
+    color: red;
+    transition-duration: 0.4s;
+  }
 }
