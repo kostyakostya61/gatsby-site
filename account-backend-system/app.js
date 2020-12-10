@@ -2,6 +2,7 @@ const express = require('express');
 const config = require('config');
 const pg = require('pg');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 
 const app = express();
 const PORT = config.get('port') || 5000;
@@ -20,6 +21,8 @@ client.connect(function (err) {
     client.end();
   });
 });
+
+app.use(cors());
 
 app.use(express.json());
 app.use(bodyParser.json());

@@ -2,16 +2,17 @@ import React, { useState } from 'react';
 import style from './main-page.module.scss';
 import image from './images/image.png';
 import Registration from './register/register';
+import Modal from '../../components/modal';
+import Login from './login/login';
 
 function MainPage() {
-  const [registerForm, setRegisterForm] = useState(true);
-
-  // function showRegisterForm() {
-  //   if (!registerForm) {
-  //     return <Registration />;
-  //   }
-  // }
-  // const handleShow = () => setRegisterForm(true);
+  const [isOpen, setIsOpen] = useState(false);
+  const [isLogin, setIsLogin] = useState(false);
+  const handleCLoseModdal = () => {
+    console.log('close');
+    setIsOpen(false);
+    setIsLogin(false);
+  };
 
   return (
     <div className={style.container}>
@@ -45,11 +46,21 @@ function MainPage() {
           </div>
 
           <div className={style.buttons}>
-            <div className={style.btn} onClick={() => setRegisterForm(true)}>
-              <button>SIGN UP</button>
+            <div className={style.btn}>
+              <button onClick={() => setIsOpen(true)}>SIGN UP</button>
+              {isOpen && (
+                <Modal onClose={handleCLoseModdal}>
+                  <Registration />
+                </Modal>
+              )}
             </div>
             <div className={style.btn}>
-              <button href="#">LOGIN</button>
+              <button onClick={() => setIsLogin(true)}>LOGIN</button>
+              {isLogin && (
+                <Modal onClose={handleCLoseModdal}>
+                  <Login />
+                </Modal>
+              )}
             </div>
           </div>
         </div>
@@ -68,10 +79,14 @@ function MainPage() {
         </div>
 
         <div className={style.sign_up}>
-          <button href="#">SIGN UP</button>
+          <button onClick={() => setIsOpen(true)}>SIGN UP</button>
+          {isOpen && (
+            <Modal onClose={handleCLoseModdal}>
+              <Registration />
+            </Modal>
+          )}
         </div>
       </div>
-      <Registration active={registerForm} setActive={setRegisterForm} />
     </div>
   );
 }

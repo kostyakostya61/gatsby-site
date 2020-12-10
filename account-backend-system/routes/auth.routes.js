@@ -25,6 +25,7 @@ router.post(
         });
       }
       const { name, lastname, email, password } = req.body;
+      console.log({ name, lastname, email, password });
 
       const checkUser = await pool.query(
         `SELECT * FROM users WHERE user_email=$1`,

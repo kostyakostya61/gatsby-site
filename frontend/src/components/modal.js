@@ -1,13 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 import style from './modal.module.scss';
 
-// onClick={()=>setActive(false)}
-//
-
-function Modal(onClose) {
+function Modal({ onClose, children }) {
   return (
-    <div className={style.modal} >
-      <div className={style.content}></div>
+    <div className={style.modal} onClick={() => onClose()}>
+      <div className={style.content} onClick={(e) => e.stopPropagation()}>
+        {children}
+      </div>
     </div>
   );
 }
