@@ -65,16 +65,15 @@ function MainPage() {
           </div>
         </div>
 
-        <div className={style.company}>
-          <div className={style.header}>
-            <h3>CLOUDBUDGET</h3>
+        {/* <div className={style.company}> */}
+        <div className={style.header}>
+          <h3>CLOUDBUDGET</h3>
 
-            <div className={style.description}>
-              <p>
-                Cloud budget management for everyone. Only €69.95 a Month After
-                a 7 Day Trial of Up to €4.99
-              </p>
-            </div>
+          <div className={style.description}>
+            <p>
+              Cloud budget management for everyone. Only €69.95 a Month After a
+              7 Day Trial of Up to €4.99
+            </p>
           </div>
         </div>
 
@@ -88,6 +87,7 @@ function MainPage() {
         </div>
       </div>
     </div>
+    // </div>
   );
 }
 

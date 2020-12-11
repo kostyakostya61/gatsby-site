@@ -1,70 +1,60 @@
-import React, { useState, useMemo } from 'react';
+import React from 'react';
 import style from './login.module.scss';
 import { loginRequest } from '../../../api/auth';
+import { Form, Field } from 'react-final-form';
+import {emailValidation,passwordValidationLogin} from '../../../utils/validator';
+
+
+
 
 function Login() {
-  const [form, setForm] = useState({
-    email: '',
-    password: '',
-  });
-  const [formError, setFormError] = useState(null);
-  const changeHandler = (event) => {
-    setForm({ ...form, [event.target.name]: event.target.value });
+  const onSubmit = (values) => {
+    loginRequest(values);
   };
 
-  //   const formErrorValidator = (e) => {
-  //       if () {
-  //           setFormError()
-  //       } else {
-  //           setFormError('')
-  //       }
-  //   };
-  const loginHandler = async () => {
-    setFormError('');
-    try {
-      console.log(form);
-      const data = await loginRequest(form);
-      console.log(data);
-    } catch (error) {
-      if (error?.response?.data?.message) {
-        setFormError(error.response.data.message);
-      }
-    }
-  };
+  const Error = ({ name }) => (
+    <Field name={name} subscription={{ error: true }}>
+      {({ meta: { error } }) => (error ? <span>{error}</span> : null)}
+    </Field>
+  );
+
   return (
     <div className={style.modal}>
-      <div className={style.string}>
-        <form>
-          <h1>Login form</h1>
-          {formError && <div style={{ color: 'red' }}>{formError}</div>}
-          <div>
-            <label>Email</label>
-            <input
-              id="email"
-              type="text"
-              placeholder="Your email"
-              type="text"
-              name="email"
-              onChange={changeHandler}
-            />
-          </div>
-          <div>
-            <label>Password</label>
-            <input
-              id="password"
-              type="text"
-              placeholder="Your password"
-              name="password"
-              type="password"
-              onChange={changeHandler}
-            />
-          </div>
-
-          <button type="button" onClick={loginHandler}>
-            Login
-          </button>
-        </form>
-      </div>
+      <Form
+        onSubmit={onSubmit}
+        render={({ handleSubmit, values }) => (
+          <form onSubmit={handleSubmit}>
+            <h1>Login</h1>
+            <Field name="email" validate={emailValidation}>
+              {({ input }) => (
+                <div>
+                  <label> Email</label>
+                  <input {...input} type="email" placeholder="Your Email" />
+                </div>
+              )}
+            </Field>
+            <div className={style.error}>
+              <Error name="email" />
+            </div>
+            <Field name="password" validate={passwordValidationLogin}>
+              {({ input }) => (
+                <div>
+                  <label>Password</label>
+                  <input
+                    {...input}
+                    type="password"
+                    placeholder="Your Password"
+                  />
+                </div>
+              )}
+            </Field>
+            <div className={style.error}>
+              <Error name="password" />
+            </div>
+            <button>Login</button>
+          </form>
+        )}
+      />
     </div>
   );
 }
