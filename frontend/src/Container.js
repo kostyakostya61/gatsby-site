@@ -1,16 +1,12 @@
 import React from 'react';
-
-// import { useRoutes } from './routes';
-// import { BrowserRouter as Router } from 'react-router-dom';
 import MainPage from './pages/main-page/main-page';
+import style from './container.module.scss'
 
 function Container() {
-  // const routes = useRoutes(false);
   return (
-    // <Router>
-    //   <div>{routes}</div>
-    // </Router>
+    <div className={style.container}>
     <MainPage />
+    </div>
   );
 }
 

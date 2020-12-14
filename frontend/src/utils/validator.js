@@ -17,14 +17,10 @@ export const passwordValidationLogin = (value) => {
 };
 
 export const passwordValidationRegister = (value) => {
-  //   console.log(value, secondvalue);
   if (value) {
     if (value.length < 6) {
       return 'Длина пароля должна быть не менее 6 символов';
     }
-    // if (value !== secondvalue) {
-    //   return 'Пароли должны совпадать';
-    // }
   } else {
     return 'Поле обязательно для заполнения';
   }

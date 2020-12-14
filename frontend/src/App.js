@@ -1,9 +1,8 @@
 import React from 'react';
-// import Modal from './components/modal';
-import Container from './Container';
+import Container from './container';
 
 function App() {
-  return <Container></Container>;
+  return <Container/>;
 }
 
 export default App;

@@ -1,13 +1,13 @@
 import React from 'react';
 import style from './register.module.scss';
-import { registrationRequest } from '../../../api/auth';
+import { registrationRequest } from '../../api/auth';
 import { Form, Field } from 'react-final-form';
 import {
   emailValidation,
   lastnameValidation,
   passwordValidationRegister,
   repeatPasswordValidationRegister,
-} from '../../../utils/validator';
+} from '../../utils/validator';
 
 function Registration() {
   const onSubmit = (values) => {

@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import style from './main-page.module.scss';
-import image from './images/image.png';
-import Registration from './register/register';
-import Modal from '../../components/modal';
-import Login from './login/login';
+import image from '../../images/image.png';
+import Registration from '../../components/register/register';
+import Modal from '../../components/modal/modal';
+import Login from '../../components/login/login';
+
+
 
 function MainPage() {
   const [isOpen, setIsOpen] = useState(false);
@@ -13,7 +15,35 @@ function MainPage() {
     setIsOpen(false);
     setIsLogin(false);
   };
+  const linkArray = [
+    {
+      id: 1,
+      name:'OVERVIEW',
+      href:'overview'
+    },
+    {
+      id: 2,
+      name:'FEATURES',
+      href:'features'
+    },
+    {
+      id: 3,
+      name:'TECHNOLOGY',
+      href:'technology'
+    },
+    {
+      id: 4,
+      name:'CONTACT',
+      href:'contact'
+    },
+    {
+      id: 5,
+      name:'PROVIDERS',
+      href:'providers'
+    }
+  ]
 
+  const linkComponents = linkArray.map (link =>{return <div><a href={link.href}>{link.name}</a></div>})
   return (
     <div className={style.container}>
       <div className={style.content}>
@@ -28,24 +58,10 @@ function MainPage() {
           </div>
 
           <div className={style.navbar}>
-            <div className={style.link}>
-              <a href="overview">OVERVIEW</a>
-            </div>
-            <div className={style.link}>
-              <a href="features">FEATURES</a>
-            </div>
-            <div className={style.link}>
-              <a href="technology">TECHNOLOGY</a>
-            </div>
-            <div className={style.link}>
-              <a href="contact">CONTACT</a>
-            </div>
-            <div className={style.link}>
-              <a href="providers">PROVIDERS</a>
-            </div>
+              <div className={style.link}>{linkComponents}</div>
           </div>
 
-          <div className={style.buttons}>
+          <div className={style.identification }>
             <div className={style.btn}>
               <button onClick={() => setIsOpen(true)}>SIGN UP</button>
               {isOpen && (

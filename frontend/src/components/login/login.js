@@ -1,8 +1,8 @@
 import React from 'react';
 import style from './login.module.scss';
-import { loginRequest } from '../../../api/auth';
+import { loginRequest } from '../../api/auth';
 import { Form, Field } from 'react-final-form';
-import {emailValidation,passwordValidationLogin} from '../../../utils/validator';
+import {emailValidation,passwordValidationLogin} from '../../utils/validator';
 
 
 
