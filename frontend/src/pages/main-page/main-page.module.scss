@@ -13,6 +13,21 @@
   background-size: 100%;
 }
 
+.shade {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(
+    90deg,
+    rgba(213, 32, 71, 0.8) 0%,
+    rgba(238, 61, 27, 0.8) 100%
+  );
+  z-index: 1;
+}
+
 .content {
   width: 100%;
   height: 100%;
@@ -21,7 +36,6 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
- 
 }
 
 .navigation {
@@ -68,11 +82,10 @@
 }
 
 .link {
-  
   display: flex;
   flex-direction: row;
-  align-items: center; 
-  a{
+  align-items: center;
+  a {
     margin-left: 20px;
   }
 }

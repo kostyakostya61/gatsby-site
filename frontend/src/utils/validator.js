@@ -1,47 +1,41 @@
-export const emailValidation = (value) => {
-  if (value) {
-    const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    if (!re.test(String(value).toLowerCase())) {
-      return 'Некорректный email';
-    }
-  } else {
-    return 'Поле обязательное для заполнения';
-  }
-};
+export const validation = (values) => {
+  const errors = {};
+  console.log(values);
+  const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
-export const passwordValidationLogin = (value) => {
-  if (value) {
-  } else {
-    return 'Поле обязательное для заполнения';
-  }
-};
+  errors.name = isRequired();
+  errors.lastname = isRequired();
+  errors.email = isRequired();
+  errors.password = isRequired();
+  errors.repeatPassword = isRequired();
+  errors.currentEmail = isRequired();
+  errors.currentPassword = isRequired;
 
-export const passwordValidationRegister = (value) => {
-  if (value) {
-    if (value.length < 6) {
-      return 'Длина пароля должна быть не менее 6 символов';
-    }
-  } else {
-    return 'Поле обязательно для заполнения';
+  if (values.name && values.name.length < 3) {
+    errors.name = 'Минимальная длина должна быть больше 3 символов';
   }
-};
+  if (values.lastname && values.lastname.length < 3) {
+    errors.lastname = 'Минимальная длина должна быть больше 3 символов';
+  }
 
-export const repeatPasswordValidationRegister = (value, confirm) => {
-  const validationPassword = passwordValidationRegister(value);
-  if (validationPassword) {
-    return validationPassword;
+  if (!re.test(String(values).toLowerCase())) {
+    errors.email = 'Некорректный email';
   }
-  if (value !== confirm.password) {
-    return 'Пароли должны совпадать';
-  }
-};
 
-export const lastnameValidation = (value) => {
-  if (value) {
-    if (value.length < 3) {
-      return 'Длина имени должна быть не менее 3 символов';
-    }
-  } else {
-    return 'Поле обязательное для заполнения';
+  if (values.password && values.password.length < 6) {
+    errors.password = 'Длина пароля должна быть не менее 6 символов';
+  }
+  if (values.password !== values.repeatPassword) {
+    errors.password = 'Пароли должны совпадать';
+  }
+  if (!re.test(String(values).toLowerCase())) {
+    errors.currentEmail = 'Некорректный email';
+  }
+
+  return errors;
+};
+const isRequired = (values) => {
+  if (!values) {
+    return 'Поле обязательно для заполения';
   }
 };

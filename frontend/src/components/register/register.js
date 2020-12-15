@@ -2,45 +2,53 @@ import React from 'react';
 import style from './register.module.scss';
 import { registrationRequest } from '../../api/auth';
 import { Form, Field } from 'react-final-form';
-import {
-  emailValidation,
-  lastnameValidation,
-  passwordValidationRegister,
-  repeatPasswordValidationRegister,
-} from '../../utils/validator';
+import { validation } from '../../utils/validator';
 
 function Registration() {
+  
   const onSubmit = (values) => {
+    console.log(values);
     registrationRequest(values);
   };
 
-  const Error = ({ name }) => (
-    <Field name={name} subscription={{ error: true }}>
-      {({ meta: { error } }) => (error ? <span>{error}</span> : null)}
-    </Field>
-  );
+
+  const ErrorValid = ({ meta }) => {
+    {
+      return (meta.error || meta.submitError) && meta.touched ? (
+        <span>{meta.error || meta.submitError}</span>
+      ) : (
+        <></>
+      );
+    }
+  };
 
   return (
     <div className={style.modal}>
       <Form
         onSubmit={onSubmit}
+        validate={validation}
         render={({ handleSubmit, values }) => (
           <form onSubmit={handleSubmit}>
             <h1>Registration</h1>
-            <Field name="name" validate={lastnameValidation}>
-              {({ input }) => (
+            <Field name="name">
+              {({ input, meta }) => (
                 <div>
                   <label>Name</label>
-                  <input {...input} type="name" placeholder="Your Name" />
+                  <input
+                    {...input}
+                    name="name"
+                    type="name"
+                    placeholder="Your Name"
+                  />
+                  <div className={style.error}>
+                    <ErrorValid meta={meta} />
+                  </div>
                 </div>
               )}
             </Field>
-            <div className={style.error}>
-              <Error name="name" />
-            </div>
 
-            <Field name="lastname" validate={lastnameValidation}>
-              {({ input }) => (
+            <Field name="lastname">
+              {({ input, meta }) => (
                 <div>
                   <label>Lastname</label>
                   <input
@@ -48,44 +56,27 @@ function Registration() {
                     type="lastname"
                     placeholder="Your Lastname"
                   />
+                  <div className={style.error}>
+                    <ErrorValid meta={meta} />
+                  </div>
                 </div>
               )}
             </Field>
-            <div className={style.error}>
-              <Error name="lastname" />
-            </div>
 
-            <Field name="email" validate={emailValidation}>
-              {({ input }) => (
+            <Field name="email">
+              {({ input, meta }) => (
                 <div>
                   <label> Email</label>
                   <input {...input} type="email" placeholder="Your Email" />
+                  <div className={style.error}>
+                    <ErrorValid meta={meta} />
+                  </div>
                 </div>
               )}
             </Field>
-            <div className={style.error}>
-              <Error name="email" />
-            </div>
-            <Field name="password" validate={passwordValidationRegister}>
-              {({ input }) => (
-                <div>
-                  <label>Password</label>
-                  <input
-                    {...input}
-                    type="password"
-                    placeholder="Your Password"
-                    />
-                    </div>
-              )}
-            </Field>
-            <div className={style.error}>
-              <Error name="password" />
-            </div>
-            <Field
-              name="repeatPassword"
-              validate={repeatPasswordValidationRegister}
-            >
-              {({ input }) => (
+
+            <Field name="password">
+              {({ input, meta }) => (
                 <div>
                   <label>Password</label>
                   <input
@@ -93,13 +84,30 @@ function Registration() {
                     type="password"
                     placeholder="Your Password"
                   />
+                  <div className={style.error}>
+                    <ErrorValid meta={meta} />
+                  </div>
                 </div>
               )}
             </Field>
-            <div className={style.error}>
-              <Error name="repeatPassword" />
-            </div>
-            <button>Registration</button>
+
+            <Field name="repeatPassword">
+              {({ input, meta }) => (
+                <div>
+                  <label>Password</label>
+                  <input
+                    {...input}
+                    type="password"
+                    placeholder="Confirm Your Password"
+                  />
+                  <div className={style.error}>
+                    <ErrorValid meta={meta} />
+                  </div>
+                </div>
+              )}
+            </Field>
+
+            <button type="submit">Registration</button>
           </form>
         )}
       />

@@ -2,55 +2,65 @@ import React from 'react';
 import style from './login.module.scss';
 import { loginRequest } from '../../api/auth';
 import { Form, Field } from 'react-final-form';
-import {emailValidation,passwordValidationLogin} from '../../utils/validator';
-
-
-
+import { validation } from '../../utils/validator';
 
 function Login() {
   const onSubmit = (values) => {
     loginRequest(values);
   };
 
-  const Error = ({ name }) => (
-    <Field name={name} subscription={{ error: true }}>
-      {({ meta: { error } }) => (error ? <span>{error}</span> : null)}
-    </Field>
-  );
+  const ErrorValid = ({ meta }) => {
+    {
+      return (meta.error || meta.submitError) && meta.touched ? (
+        <span>{meta.error || meta.submitError}</span>
+      ) : (
+        <></>
+      );
+    }
+  };
 
   return (
     <div className={style.modal}>
       <Form
         onSubmit={onSubmit}
+        validate={validation}
         render={({ handleSubmit, values }) => (
           <form onSubmit={handleSubmit}>
             <h1>Login</h1>
-            <Field name="email" validate={emailValidation}>
-              {({ input }) => (
+            <Field name="currentEmail">
+              {({ input, meta }) => (
                 <div>
                   <label> Email</label>
-                  <input {...input} type="email" placeholder="Your Email" />
+                  <input
+                    {...input}
+                    type="email"
+                    name="currentEmail"
+                    placeholder="Your Email"
+                  />
+                  <div className={style.error}>
+                    <ErrorValid meta={meta} />
+                  </div>
                 </div>
               )}
             </Field>
-            <div className={style.error}>
-              <Error name="email" />
-            </div>
-            <Field name="password" validate={passwordValidationLogin}>
-              {({ input }) => (
+
+            <Field name="currentPassword">
+              {({ input, meta }) => (
                 <div>
                   <label>Password</label>
                   <input
                     {...input}
                     type="password"
                     placeholder="Your Password"
+                    name="currentPassword"
                   />
+                  <div className={style.error}>
+                    <ErrorValid meta={meta} />
+                  </div>
                 </div>
               )}
             </Field>
-            <div className={style.error}>
-              <Error name="password" />
-            </div>
+
             <button>Login</button>
           </form>
         )}
