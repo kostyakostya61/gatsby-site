@@ -1,21 +1,26 @@
-// import React from 'react';
-// import { Switch, Route, Redirect } from 'react-router-dom';
-// import MainPage from './pages/main-page/main-page';
+import React from 'react';
+import { Switch, Route, Redirect } from 'react-router-dom';
+import AuthPage from './pages/auth-page/auth-page';
+import MainPage from './pages/main-page/main-page';
 
-// export const useRoutes = (isAuthenticated) => {
-//   if (isAuthenticated) {
-//     return (
-//       <Switch>
-//         <Route path="/yourname/:id" exact>
-//           <MainPage />
-//         </Route>
-//         <Redirect path="/main" />
-//       </Switch>
-//     );
-//   }
-//   return (
-//     <Switch>
-//       <Route path="/" exact></Route>
-//     </Switch>
-//   );
-// };
+export const useRoutes = (isAuthenticated) => {
+  console.log(isAuthenticated);
+  if (isAuthenticated) {
+    return (
+      <Switch>
+        <Route path="/auth" exact>
+          <AuthPage />
+        </Route>
+        <Redirect to="/" />
+      </Switch>
+    );
+  }
+  return (
+    <Switch>
+      <Route path="/" exact>
+        <MainPage />
+      </Route>
+      <Redirect to="/" />
+    </Switch>
+  );
+};

@@ -1,13 +1,13 @@
-import React from 'react';
-import MainPage from './pages/main-page/main-page';
-import style from './container.module.scss'
+// import React from 'react';
+// import MainPage from './pages/main-page/main-page';
+// import style from './container.module.scss'
 
-function Container() {
-  return (
-    <div className={style.container}>
-    <MainPage />
-    </div>
-  );
-}
+// function Container() {
+//   return (
+//     <div className={style.container}>
+//     <MainPage />
+//     </div>
+//   );
+// }
 
-export default Container;
+// export default Container;

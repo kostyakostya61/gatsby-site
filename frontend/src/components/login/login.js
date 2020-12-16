@@ -1,12 +1,22 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import style from './login.module.scss';
 import { loginRequest } from '../../api/auth';
 import { Form, Field } from 'react-final-form';
-import { validation } from '../../utils/validator';
+import { loginValidation } from '../../utils/validator';
+import { AuthContext } from '../context/auth-context';
 
 function Login() {
-  const onSubmit = (values) => {
-    loginRequest(values);
+  console.log(AuthContext);
+  const onSubmit = async (values) => {
+    // loginRequest(values);
+    // auth.login(values.token);
+    try {
+      const loginValue = await loginRequest(values);
+      console.log(loginValue);
+      // const logIn = ;
+    } catch (e) {
+      console.log(e);
+    }
   };
 
   const ErrorValid = ({ meta }) => {
@@ -23,18 +33,18 @@ function Login() {
     <div className={style.modal}>
       <Form
         onSubmit={onSubmit}
-        validate={validation}
+        validate={loginValidation}
         render={({ handleSubmit, values }) => (
           <form onSubmit={handleSubmit}>
             <h1>Login</h1>
-            <Field name="currentEmail">
+            <Field name="email">
               {({ input, meta }) => (
                 <div>
                   <label> Email</label>
                   <input
                     {...input}
                     type="email"
-                    name="currentEmail"
+                    name="email"
                     placeholder="Your Email"
                   />
                   <div className={style.error}>
@@ -44,7 +54,7 @@ function Login() {
               )}
             </Field>
 
-            <Field name="currentPassword">
+            <Field name="password">
               {({ input, meta }) => (
                 <div>
                   <label>Password</label>
@@ -52,7 +62,7 @@ function Login() {
                     {...input}
                     type="password"
                     placeholder="Your Password"
-                    name="currentPassword"
+                    name="password"
                   />
                   <div className={style.error}>
                     <ErrorValid meta={meta} />
@@ -61,7 +71,7 @@ function Login() {
               )}
             </Field>
 
-            <button>Login</button>
+            <button type="submit">Login</button>
           </form>
         )}
       />

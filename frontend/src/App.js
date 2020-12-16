@@ -2,7 +2,7 @@ import React from 'react';
 import Container from './container';
 
 function App() {
-  return <Container/>;
+  return <Container />;
 }
 
 export default App;
