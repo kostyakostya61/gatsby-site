@@ -1,17 +1,21 @@
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
+import { AuthContext } from './components/context/auth-context';
 import AuthPage from './pages/auth-page/auth-page';
 import MainPage from './pages/main-page/main-page';
 
-export const useRoutes = (isAuthenticated) => {
-  console.log(isAuthenticated);
-  if (isAuthenticated) {
+export const useRoutes = () => {
+  const auth = useContext(AuthContext);
+  useEffect(() => {
+    console.log(auth);
+  }, [auth]);
+  if (false) {
     return (
       <Switch>
-        <Route path="/auth" exact>
+        <Route path="/auth-page" exact>
           <AuthPage />
         </Route>
-        <Redirect to="/" />
+        {/* <Redirect to="/" /> */}
       </Switch>
     );
   }
@@ -20,7 +24,7 @@ export const useRoutes = (isAuthenticated) => {
       <Route path="/" exact>
         <MainPage />
       </Route>
-      <Redirect to="/" />
+      {/* <Redirect to="/" /> */}
     </Switch>
   );
 };

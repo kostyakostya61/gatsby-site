@@ -1,26 +1,25 @@
-import { useState, useCallback, useEffect } from 'react';
+// import { useState, useCallback, useEffect } from 'react';
 
-const storageName = 'token';
-export const useAuth = () => {
-  const [token, setToken] = useState(null);
+// const storageName = 'token';
+// export const useAuth = () => {
+//   const [token, setToken] = useState(null);
+//   console.log(token);
+//   const login = useCallback((jwtToken) => {
+//     setToken(jwtToken);
+//     localStorage.setItem(storageName, jwtToken);
+//   }, []);
+//   const logout = useCallback(() => {
+//     setToken(null);
 
-  const login = useCallback((jwtToken) => {
-    setToken(jwtToken);
+//     localStorage.removeItem(storageName);
+//   }, []);
 
-    localStorage.setItem(storageName, jwtToken);
-  }, []);
-  const logout = useCallback(() => {
-    setToken(null);
-    // setUserId(null);
-    localStorage.removeItem(storageName);
-  }, []);
+//   useEffect(() => {
+//     const tokenValue = localStorage.getItem(storageName);
+//     if (tokenValue) {
+//       login(tokenValue);
+//     }
+//   }, [login]);
 
-  useEffect(() => {
-    const data = localStorage.getItem(storageName);
-    if (data) {
-      login(data);
-    }
-  }, [login]);
-
-  return { login, logout, token };
-};
+//   return { login, logout, token };
+// };

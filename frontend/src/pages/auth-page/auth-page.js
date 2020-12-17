@@ -3,9 +3,16 @@ import style from './auth-page.module.scss';
 import image from '../../images/image.png';
 import Description from '../../components/auth-page-components/description/description';
 import { AuthContext } from '../../components/context/auth-context';
+import { useHistory } from 'react-router-dom';
 
 function AuthPage() {
-  // const auth = useContext(AuthContext);
+  const auth = useContext(AuthContext);
+  let history = useHistory();
+  const logoutHandler = (event) => {
+    event.preventDefault();
+    auth.logout();
+    history.push('/');
+  };
 
   const linkArray = [
     {
@@ -57,7 +64,7 @@ function AuthPage() {
 
             <div className={style.identification}>
               <div className={style.btn}>
-                <button>LOG OUT</button>
+                <button onClick={logoutHandler}>LOG OUT</button>
               </div>
             </div>
           </div>
