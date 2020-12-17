@@ -3,27 +3,21 @@ import style from './login.module.scss';
 import { loginRequest } from '../../api/auth';
 import { Form, Field } from 'react-final-form';
 import { loginValidation } from '../../utils/validator';
-// import { AuthContext } from '../context/auth-context';
-import { useAuth } from '../hooks/auth.hook';
+
 import { useHistory } from 'react-router-dom';
 import { withRouter } from 'react-router';
 import { AuthContext } from '../context/auth-context';
 
 function Login() {
   let history = useHistory();
-  // const auth = useAuth();
-  // console.log(auth);
+
   const auth = useContext(AuthContext);
-  console.log(auth);
-  // let history = useHistory();
+
   const onSubmit = async (values) => {
     try {
       const loginValue = await loginRequest(values);
       auth.login(loginValue.data.token);
       history.push('/auth-page');
-      // auth.login(loginValue.data.token);
-      // history.push('/auth-page');
-      // window.location.reload();
     } catch (e) {
       console.log(e);
     }

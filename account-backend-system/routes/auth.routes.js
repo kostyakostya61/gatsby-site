@@ -83,4 +83,17 @@ router.post('/login', async (req, res) => {
     res.status(500).json({ message: 'Возникла ошибка,попробуйте снова' });
   }
 });
+
+// /auth/name
+router.get('/name', async (req, res) => {
+  try {
+ 
+
+    res.json({ message: 'Успешно' });
+  } catch (e) {
+    console.log(e);
+    res.status(500).json({ message: 'Возникла ошибка,попробуйте снова' });
+  }
+});
+
 module.exports = router;

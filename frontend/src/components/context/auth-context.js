@@ -1,13 +1,5 @@
 import React, { useState, createContext, useMemo, useEffect } from 'react';
 
-// function noop() {}
-// export const AuthContext = createContext({
-//   token: null,
-//   login: noop(),
-//   logout: noop(),
-//   isAuthenricated: false,
-// });
-
 export const AuthContext = createContext({});
 
 export const AuthProvider = ({ children }) => {
@@ -15,7 +7,6 @@ export const AuthProvider = ({ children }) => {
   const [token, setToken] = useState(tokenValue);
   const isAuth = useMemo(() => !!token, [token]);
   const login = (jwtToken) => {
-    console.log('jwtToken', jwtToken);
     setToken(jwtToken);
     localStorage.setItem('token', jwtToken);
   };
