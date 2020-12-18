@@ -1,8 +1,9 @@
 import React, { useContext, useEffect } from 'react';
-import { Switch, Route } from 'react-router-dom';
-import Description from './components/auth-page-components/description/description';
+import { Switch, Route, Redirect } from 'react-router-dom';
+
 import { AuthContext } from './components/context/auth-context';
 import AuthPage from './pages/auth-page/auth-page';
+import ChangeDataPage from './pages/change-data-page/change-data-page';
 import MainPage from './pages/main-page/main-page';
 
 export const useRoutes = () => {
@@ -15,8 +16,11 @@ export const useRoutes = () => {
       <Switch>
         <Route path="/auth-page" exact>
           <AuthPage />
-          <Description />
         </Route>
+        <Route to="/change-data">
+          <ChangeDataPage />
+        </Route>
+        <Redirect to="/auth-page" />
       </Switch>
     );
   }

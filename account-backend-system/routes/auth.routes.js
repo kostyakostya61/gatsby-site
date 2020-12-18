@@ -87,9 +87,24 @@ router.post('/login', async (req, res) => {
 // /auth/name
 router.get('/name', async (req, res) => {
   try {
- 
+    const sentToken = req.headers;
+    console.log(req);
+    const userId = jwt.decode(sentToken.token);
+    const userIdValue = userId.obj;
 
-    res.json({ message: 'Успешно' });
+    const userName = await pool.query(
+      `SELECT user_first_name FROM users WHERE user_id=$1 `,
+      [userIdValue]
+    );
+
+    if (userName.rows.length === 0) {
+      return res.status(401).json({
+        message: 'Возникла ошибка,пользователя с таким именем не существует',
+      });
+    }
+    console.log(userName.rows[0]);
+
+    res.json(userName.rows[0]);
   } catch (e) {
     console.log(e);
     res.status(500).json({ message: 'Возникла ошибка,попробуйте снова' });
