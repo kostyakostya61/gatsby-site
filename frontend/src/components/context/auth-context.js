@@ -17,9 +17,9 @@ export const AuthProvider = ({ children }) => {
   };
   const contextValue = useMemo(() => ({ login, logout, token, isAuth }));
   useEffect(() => {
-    const tokenAuth = tokenValue;
-    if (tokenAuth) {
-      login(tokenAuth);
+    // const tokenAuth = tokenValue;
+    if (tokenValue) {
+      login(tokenValue);
     }
   }, [login]);
   return (

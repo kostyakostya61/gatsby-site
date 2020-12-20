@@ -65,7 +65,7 @@ function AuthPage() {
 
   useEffect(() => {
     userName();
-  }, [userName]);
+  }, []);
 
   // if (!userValue.user_first_name) {
   //   return <Spinner intent={'primary'} />;

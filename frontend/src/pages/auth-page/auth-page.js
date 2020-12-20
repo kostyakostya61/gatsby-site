@@ -1,7 +1,6 @@
 import React, { useCallback, useContext, useEffect, useState } from 'react';
 import style from './auth-page.module.scss';
 import image from '../../images/image.png';
-// import Description from '../../components/auth-page-components/description/description';
 import { AuthContext } from '../../components/context/auth-context';
 import { useHistory } from 'react-router-dom';
 import { UserContext } from '../../components/context/user-context';
@@ -63,11 +62,9 @@ function AuthPage() {
 
   useEffect(() => {
     userName();
-  }, [userName]);
+  }, []);
 
-  // if (!userValue.user_first_name) {
-  //   return <Spinner intent={'primary'} />;
-  // }
+ 
 
   return (
     <>
