@@ -9,6 +9,8 @@
   align-items: center;
   * {
     font-family: 'Lato';
+    color: black;
+    font-size: 18px;
   }
 
   form {
@@ -46,8 +48,21 @@
     color: black;
     font-size: 18px;
   }
+  h3 {
+    font-size: 22px;
+  }
 }
 
+// .error {
+//   display: flex;
+//   flex-direction: column;
+//   align-items: center;
+//   * {
+//     font-family: 'Lato';
+//     color: red;
+//     font-weight: 300;
+//   }
+// }
 .error {
   display: flex;
   flex-direction: column;
@@ -57,4 +72,9 @@
     color: red;
     font-weight: 300;
   }
+}
+.error_text {
+  font-family: 'Lato';
+  color: red;
+  font-weight: 300;
 }

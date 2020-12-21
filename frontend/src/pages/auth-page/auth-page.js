@@ -4,7 +4,7 @@ import image from '../../images/image.png';
 import { AuthContext } from '../../components/context/auth-context';
 import { useHistory } from 'react-router-dom';
 import { UserContext } from '../../components/context/user-context';
-import { nameRequest } from '../../api/auth';
+
 import { Spinner } from '@blueprintjs/core';
 import Description from '../../components/auth-page-components/description/description';
 
@@ -21,8 +21,6 @@ function AuthPage() {
   };
   console.log(userValue);
   const userName = useCallback(async (values) => {
-    // const userNameValue = await nameRequest(values);
-    // console.log(userNameValue.data.user_first_name);
     const userNameValue = await user.findUser(values);
 
     setUserValue({ name: userNameValue.user_first_name });
@@ -31,8 +29,8 @@ function AuthPage() {
 
   const linkArray = [
     {
-      name: 'OVERVIEW',
-      href: 'overview',
+      name: 'NOTES PAGE',
+      href: 'notes-page',
     },
     {
       name: 'FEATURES',
@@ -63,8 +61,6 @@ function AuthPage() {
   useEffect(() => {
     userName();
   }, []);
-
- 
 
   return (
     <>

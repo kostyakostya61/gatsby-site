@@ -146,7 +146,11 @@
   width: 600px;
 }
 
-.sign_up {
+.edit_button {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
   button {
     background: #fff;
     border-radius: 6px;
@@ -155,7 +159,7 @@
     font-family: 'Lato';
     font-weight: 400;
     color: rgba(237, 76, 92, 1);
-    font-size: 14px;
+    font-size: 18px;
     line-height: 17px;
     border: 1px solid #ffffff;
     cursor: pointer;

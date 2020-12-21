@@ -93,7 +93,7 @@ router.get('/name', async (req, res) => {
     const userIdValue = userId.obj;
 
     const userName = await pool.query(
-      `SELECT user_first_name FROM users WHERE user_id=$1 `,
+      `SELECT user_id,user_first_name,user_last_name,user_email FROM users WHERE user_id=$1 `,
       [userIdValue]
     );
 
@@ -105,6 +105,58 @@ router.get('/name', async (req, res) => {
     console.log(userName.rows[0]);
 
     res.json(userName.rows[0]);
+  } catch (e) {
+    console.log(e);
+    res.status(500).json({ message: 'Возникла ошибка,попробуйте снова' });
+  }
+});
+// /auth/change-data
+router.put('/change-data', async (req, res) => {
+  try {
+    const sentToken = req.headers;
+
+    const userId = jwt.decode(sentToken.token);
+    const userIdValue = userId.obj;
+    const { name, lastname, email, password, newPassword } = req.body;
+    const user = await pool.query('SELECT * FROM users WHERE user_id=$1', [
+      userIdValue,
+    ]);
+    if (user.rows.length === 0) {
+      return res.status(404).json({
+        message: 'Такого пользователя не существует,пройдите регистрацию',
+      });
+    }
+
+    if ((!password, !newPassword)) {
+      const changeData = await pool.query(
+        `UPDATE users 
+        SET user_email=$1, user_first_name=$2,user_last_name=$3 WHERE user_id=$4 `,
+        [email, name, lastname, userIdValue]
+      );
+      console.log(changeData);
+      return res.status(200).json({ message: 'Данные успешно изменены' });
+    }
+    // Проверяем совпадают ли пароли
+    const validPassword = await bcrypt.compare(password, user.rows[0].password);
+
+    if (!validPassword) {
+      return res
+        .status(401)
+        .json({ message: `Для смены пароля,необходимо ввести старый пароль` });
+    }
+
+    const saltRound = 10;
+    const salt = await bcrypt.genSalt(saltRound);
+    const bcryptNewPassword = await bcrypt.hash(newPassword, salt);
+    // Обновляем информацию в базе данных
+    const changeData = await pool.query(
+      `UPDATE users 
+      SET user_email=$1, user_first_name=$2,user_last_name=$3,password=$4 WHERE user_id=$5 `,
+      [email, name, lastname, bcryptNewPassword, userIdValue]
+    );
+
+    console.log(changeData);
+    res.status(200).json({ message: 'Данные успешно изменены' });
   } catch (e) {
     console.log(e);
     res.status(500).json({ message: 'Возникла ошибка,попробуйте снова' });

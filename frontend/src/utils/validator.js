@@ -41,6 +41,26 @@ export const loginValidation = (values) => {
   }
   return errors;
 };
+
+export const changeDataValidation = (values) => {
+  const errors = {};
+  const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+  if (!re.test(String(values.email).toLowerCase())) {
+    errors.email = 'Некорректный email';
+  }
+  if (values.name && values.name.length < 3) {
+    errors.name = 'Минимальная длина должна быть больше 3 символов';
+  }
+  if (values.lastname && values.lastname.length < 3) {
+    errors.lastname = 'Минимальная длина должна быть больше 3 символов';
+  }
+  if (values.newPassword && values.newPassword.length < 6) {
+    errors.newPassword = 'Длина пароля должна быть не менее 6 символов';
+  }
+  return errors;
+};
+
 const isRequired = (values) => {
   if (!values) {
     return 'Поле обязательно для заполения';

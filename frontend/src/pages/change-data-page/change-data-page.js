@@ -7,23 +7,28 @@ import { useHistory } from 'react-router-dom';
 import { UserContext } from '../../components/context/user-context';
 
 import { Spinner } from '@blueprintjs/core';
+import Modal from '../../components/modal/modal';
+import ChangeData from '../../components/change-data/change-data';
 
 function AuthPage() {
   const [userValue, setUserValue] = useState({});
+  const [isOpen, setIsOpen] = useState(false);
   const auth = useContext(AuthContext);
   const user = useContext(UserContext);
-  // console.log(user.data);
+
+  const handleCLoseModdal = () => {
+    setIsOpen(false);
+  };
+
   let history = useHistory();
   const logoutHandler = (event) => {
     event.preventDefault();
     auth.logout();
     history.push('/');
   };
-  console.log(userValue);
+
   const userName = useCallback(
     async (values) => {
-      // const userNameValue = await nameRequest(values);
-      // console.log(userNameValue.data.user_first_name);
       const userNameValue = await user.findUser(values);
 
       setUserValue({ name: userNameValue.user_first_name });
@@ -38,8 +43,8 @@ function AuthPage() {
       href: 'auth-page',
     },
     {
-      name: 'OVERVIEW',
-      href: 'overview',
+      name: 'NOTES PAGE',
+      href: 'notes-page',
     },
     {
       name: 'FEATURES',
@@ -66,10 +71,6 @@ function AuthPage() {
   useEffect(() => {
     userName();
   }, []);
-
-  // if (!userValue.user_first_name) {
-  //   return <Spinner intent={'primary'} />;
-  // }
 
   return (
     <div className={style.container}>
@@ -104,6 +105,18 @@ function AuthPage() {
                 <Spinner intent="primary" />
               ) : (
                 <p>Hello {userValue.name}!</p>
+              )}
+            </div>
+            <div className={style.description}>
+              <h3>Do you want to edit your profile?</h3>
+            </div>
+            <div className={style.edit_button}>
+              <button onClick={() => setIsOpen(true)}>Click here</button>
+              {isOpen && (
+                <Modal onClose={handleCLoseModdal}>
+                  {/* <ChangeData /> */}
+                  <ChangeData />
+                </Modal>
               )}
             </div>
           </div>

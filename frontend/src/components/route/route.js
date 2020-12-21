@@ -1,12 +1,5 @@
 import React from 'react';
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Redirect,
-  useHistory,
-  useLocation,
-} from 'react-router-dom';
+import { Route, Redirect } from 'react-router-dom';
 
 function PrivateRoute({
   children,
@@ -18,7 +11,11 @@ function PrivateRoute({
     <Route
       {...rest}
       render={() =>
-        renderComponent ? children : <Redirect to={{ pathRedirect }} />
+        renderComponent ? (
+          children
+        ) : (
+          <Redirect to={{ pathname: pathRedirect }} />
+        )
       }
     />
   );

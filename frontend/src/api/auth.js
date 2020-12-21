@@ -11,3 +11,7 @@ export const loginRequest = (data) => {
 export const nameRequest = (headers) => {
   return Api('get', '/auth/name', null, { token: headers });
 };
+
+export const changeDataRequest = (data, headers) => {
+  return Api('put', '/auth/change-data', data, { token: headers });
+};
