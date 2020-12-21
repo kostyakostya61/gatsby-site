@@ -1,17 +1,27 @@
-import React,{  } from "react";
+import React from 'react';
 import {
-    BrowserRouter as Router,
-    Switch,
-    Route,
-    Link,
-    Redirect,
-    useHistory,
-    useLocation
-  } from "react-router-dom";
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+  useHistory,
+  useLocation,
+} from 'react-router-dom';
 
-function PrivateRoute() {
-
-    return 
+function PrivateRoute({
+  children,
+  renderComponent = false,
+  pathRedirect = '/',
+  ...rest
+}) {
+  return (
+    <Route
+      {...rest}
+      render={() =>
+        renderComponent ? children : <Redirect to={{ pathRedirect }} />
+      }
+    />
+  );
 }
 
-export default PrivateRoute
+export default PrivateRoute;

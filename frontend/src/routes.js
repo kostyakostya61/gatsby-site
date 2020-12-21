@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 
 import { AuthContext } from './components/context/auth-context';
+import PrivateRoute from './components/route/route';
 import AuthPage from './pages/auth-page/auth-page';
 import ChangeDataPage from './pages/change-data-page/change-data-page';
 import MainPage from './pages/main-page/main-page';
@@ -14,14 +15,23 @@ export const useRoutes = () => {
   if (isAuth) {
     return (
       <Switch>
-        <Route path="/auth-page" exact>
+        <PrivateRoute path="/auth-page">
           <AuthPage />
-        </Route>
-        <Route to="/change-data">
+        </PrivateRoute>
+        <PrivateRoute to="/change-data">
           <ChangeDataPage />
-        </Route>
+        </PrivateRoute>
         <Redirect to="/auth-page" />
       </Switch>
+      // <Switch>
+      //   <Route path="/auth-page" exact>
+      //     <AuthPage />
+      //   </Route>
+      //   <Route to="/change-data">
+      //     <ChangeDataPage />
+      //   </Route>
+      //   <Redirect to="/auth-page" />
+      // </Switch>
     );
   }
 
