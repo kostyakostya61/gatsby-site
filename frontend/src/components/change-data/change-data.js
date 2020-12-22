@@ -144,8 +144,7 @@ function ChangeData() {
             </Field>
 
             <button type="submit">
-              Change
-              {isLoading ? <Spinner size="20" intent="primary" /> : null}
+              {isLoading ? <Spinner size="20" intent="primary" /> : 'Change'}
             </button>
           </form>
         )}
